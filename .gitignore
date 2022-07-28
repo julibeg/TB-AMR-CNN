@@ -3,6 +3,7 @@ data
 
 # internal validation scripts / notebooks
 eval*
+*.sh
 
 # models created in initial exploratory phase
 code/saved_models

@@ -12,13 +12,14 @@ EPOCHS = 100
 # set random seed for improved reproducibility (perfect reproducibility with GPUs is
 # impossible because of randomness intrinsic in some low-level GPU optimisations). We'll
 # define a variable so that it can also be used for `pd.DataFrame.sample()` below)
-RANDOM_SEED = 123
+RANDOM_SEED = 42
 tf.random.set_seed(RANDOM_SEED)
 # decide whether the loss function (BCE) should take the number of observations for each
 # drug into account (i.e. give a higher weight to drugs with fewer resistance
-# phenotypes). In our experience, there was not much difference and models with the
-# unweighted loss actually converged faster and generalised better.
-WEIGHTED_LOSS = False
+# phenotypes). In our experience, there was not much difference.
+WEIGHTED_LOSS = True
+# define name under which the model and training history should be saved
+MODEL_NAME = "v0.1_weighted"
 
 # use mixed precision to improve efficiency
 tf.keras.mixed_precision.set_global_policy("mixed_float16")
@@ -135,8 +136,7 @@ m.compile(
 )
 
 # create a directory to save the model checkpoints etc.
-model_version = "0.1"
-model_dir = f"{util.SAVED_MODELS_PATH}/v{model_version}_FINAL_TEST"
+model_dir = f"{util.SAVED_MODELS_PATH}/{MODEL_NAME}"
 pathlib.Path(model_dir).mkdir(exist_ok=True, parents=True)
 
 # fit the model
