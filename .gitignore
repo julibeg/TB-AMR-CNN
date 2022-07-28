@@ -1,3 +1,12 @@
+# input data
+data
+
+# internal validation scripts / notebooks
+eval*
+
+# models created in initial exploratory phase
+code/saved_models
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
